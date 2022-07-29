@@ -11,11 +11,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('toolsModel', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->text('description');
             $table->text('link');
-            $table->string('tags');
+            $table->text('tag');
+            // $table->string('tags');
             $table->timestamps();
         });
     }
@@ -24,6 +25,8 @@ return new class extends Migration
     
     public function down()
     {
+        
+    
         Schema::dropIfExists('toolsModel');
     }
     

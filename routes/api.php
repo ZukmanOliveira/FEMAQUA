@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\toolsController;
 use App\Http\Controllers\UserController;
 use App\Http\Models\toolModel;
+use App\Http\Models\toolTags;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/tools', [toolsController::class, 'getAllTool']);
 Route::get('/tool/{tags}', [toolsController::class, 'getTool']);
 Route::post('tool', [toolsController::class, 'createTool']);
-Route::get('/tool/{id}', [toolsController::class, 'updateTool']);
 Route::delete('/tools/{id}', [toolsController::class, 'deleteTool']);
 
 /*
