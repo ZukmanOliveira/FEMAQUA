@@ -1,0 +1,336 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\toolsModel;
+use App\Models\tagsModel;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\toolsController;
+
+
+class toolsController extends Controller
+{
+    //
+     public function getAllTool() {
+       // logic to get all students goes here
+       $tags = tagsModel::get()->toJson(JSON_PRETTY_PRINT);
+       // return response($tool,200);
+       
+        return response($tags,200);
+      }
+
+        
+      public function createTool(Request $request) {
+        // logic to create a student record goes here
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+        
+        $tool = new toolsModel;
+        $tool->title = $request->title;
+        $tool->link = $request->link;
+        $tool->description =$request->description;
+   
+        //$tool = tagsModel::with('tags')->find(1);
+        
+        $tags = [
+          'tags'=> $tags
+        ];
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+        $tag = tagsModel::find(1);
+        //$insertTag = $tag->tags()->create($tag);
+        
+
+
+       /*   $tags = tagsModel::find(1);
+       foreach ($request->tags as $value){
+          $tags = new tagsModel;
+          $tags->tags = $tag=[];
+          //$tags->tags = $value;
+          $tags = tagsModel::create($tag);
+          $tags->save();
+        }
+      */$tool->tags=$request->tags;
+       // dd($tool);
+       foreach($request=$tool as $tags){
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+        //$tag = tagsModel::find(4);
+      //  $id_tool = new tagsModel;
+       // $tool -> tags =$request >$tags;
+        $tool = tagsModel::find(1);
+        $tool ['tags'] = $tags;
+       //$tags= $tool->save();
+       //$tool->tags -> save() ;
+       //$tool ->tags->with('tags');
+        
+          $tool = tagsModel::find(1);
+          $tags->tool = $request->tool;
+          dd($tags);
+            $tags->save();
+       }
+      
+        //$tool->save();
+        //$tags = new tagsModel;
+       // $tags->tags = $request->tags;
+        
+        //$id_tool=1;
+        //$tool = tagsModel::with('id_tool')->find(1);
+        //cadastro das tags 
+        
+        
+        
+       
+        
+        //$tool = tagsModel::with('tags')->find(1);
+        //$tool = toolsModel::with('tags')->find(1);
+        //$tool = toolsModel::with('tags')->find($tags);
+    
+    
+        
+        
+     // $tags = tagsModel::get()->toJson(JSON_PRETTY_PRINT);
+     // return response($tags,200);
+       $tool = toolsModel::get(['title','link','description'])->toJson(JSON_PRETTY_PRINT);
+       return response($tool,200);
+
+       return response()->json([
+            "message" => "tools record created"
+        ], 201);
+      }  
+
+      
+      //Pesquisa por tags
+      public function getTool( $tags) {
+        
+        $tags = tagsModel::where('tags',$tags)->first();
+        return response($tags,200);
+      }
+
+
+  
+    public function deleteTool ($id) {
+        // logic to delete a student record goes here
+         if(toolsModel::where('id', $id)->exists()) {
+           $tool = toolsModel::find($id);
+           $tool->delete();
+   
+           return response()->json([
+             "message" => "records deleted"
+           ], 202);
+         } else {
+           return response()->json([
+             "message" => "Student not found"
+           ], 404);
+         }     
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      }
+}
+
+
+
+  // logic to create a student record goes here
+      /*#########################################################
+        
+        $tool = new toolsModel;
+        $tool->title = $request->title;
+        $tool->link = $request->link;
+        $tool->description =$request->description;
+        $tool->save();
+        
+        $tags = $request->tags;
+        $id_tool = $request->id_tool;
+        foreach($request->$tags as $tag){
+          $tags = new tagsModel;
+        ''
+
+          $tags ->tags = $tag;
+          
+          $tags ->save();
+
+          $tool->tag()->save($tag);
+        }
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+     
+        $tool = new toolsModel;
+        $tool->tags=$request->tags;
+        
+     
+        $tool->save();
+        //$tool = tagsModel::with('tags')->find(1);
+      
+        $tags = [
+          'tags'=> $tags
+        ];
+        $tags = 
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+        $tag = tagsModel::find(1);
+    
+        //$tags -> save();
+        //$insertTag = $tag->tags()->create($tag);
+     
+
+       /*   $tags = tagsModel::find(1);
+       foreach ($request->tags as $value){
+          $tags = new tagsModel;
+          $tags->tags = $tag=[];
+          //$tags->tags = $value;
+          $tags = tagsModel::create($tag);
+          $tags->save();
+        }
+
+      
+      $tool->tags=$request->tags;
+ 
+        $tool->tags->save('tags');
+       $tags->tags()->save($tool);
+
+       foreach($request=$tool as $tags){
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+   
+        $tag = tagsModel::find(4);
+      //  $id_tool = new tagsModel;
+       // $tool -> tags =$request >$tags;
+
+       $tags->save($tool);
+     
+
+      // $tags = new tagsModel(array('tags'=>$tags));
+       $tool = toolsModel::find(1);
+
+      
+       }
+     
+        //$tool->save();
+        $tags = new tagsModel;
+        $tags->tags = $request->tags;
+        
+        //$id_tool=1;
+        //$tool = tagsModel::with('id_tool')->find(1);
+        //cadastro das tags 
+        
+        
+        
+       
+        
+        //$tool = tagsModel::with('tags')->find(1);
+        //$tool = toolsModel::with('tags')->find(1);
+        //$tool = toolsModel::with('tags')->find($tags);
+    
+    
+        
+        
+     // $tags = tagsModel::get()->toJson(JSON_PRETTY_PRINT);
+     // return response($tags,200);
+       $tool = toolsModel::get(['title','link','description'])->toJson(JSON_PRETTY_PRINT);
+       return response($tool,200);
+
+       return response()->json([
+            "message" => "tools record created"
+        ], 201);
+      }  
+      
+      */
+      //Pesquisa por tags
+
+
+       public function createTool(Request $request) {
+      //trabalhando com tools
+        $tool = new toolsModel();
+        $tool->title = $request->title;
+        $tool->link = $request->link;
+        $tool->description = $request->description;
+        $tool->save();
+        
+        $tags = new tagsModel();
+        $tags->tags = $request->tags;
+        $tags->id_tool = $tool->id;
+        foreach($request->tags as $value){
+          $tags = new tagsModel();
+          $tags->tags = $value;
+          $tags->id_tool = $tool->id;
+          $tags->save();
+        }
+        $tags->save();      
+      //trabalhando com tags
+        foreach($tags as $tag){
+          $tags = new tagsModel();
+          $tags->tags = $tag;
+          $tool->tags = $request->tags;
+        
+          $tool->tags()->save($tags);
+        }
+         
+        //$tools = $tool->with('tags');
+       // $tools = toolsModel::get()->toJson(JSON_PRETTY_PRINT);
+        return response($tool,200); 
+      }        ;
+
+
+
+
+  //###########################################
+
+   public function createTool(Request $request) {
+      //trabalhando com tools
+        $tool = new toolsModel();
+        $tool->title = $request->title;
+        $tool->link = $request->link;
+        $tool->description = $request->description;
+        $tool->save();
+        
+        $tags = new tagsModel();
+        $tags->tags = $request->tags;
+        $tags->id_tool = $tool->id;
+          foreach($request->tags as $value){
+          $tags = new tagsModel();
+          $tags->tags = $value;
+          $tags->id_tool = $tool->id;
+          $tags->save();
+        }
+        $tags->save();      
+      //trabalhando com tags
+        foreach($tags as $tag){
+          $tags = new tagsModel();
+          $tags->tags = $tag;
+          $tool->tags = $request->tags;
+        
+          $tool->tags()->save($tags);
+        }
+         
+        //$tools = $tool->with('tags');
+       // $tools = toolsModel::get()->toJson(JSON_PRETTY_PRINT);
+        return response($tool,200); 
+      }        
+
+      public function getTool( $tool) {
+        $tags = new tagsModel();
+    
+        $tool = tagsModel::where('tags',$tool)->first();
+        return response($tool,200);
+
+     
+      }

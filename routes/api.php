@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/tools', [toolsController::class, 'getAllTool']);
 Route::get('/tool/{tags}', [toolsController::class, 'getTool']);
-Route::post('tool', [toolsController::class, 'createTool']);
+Route::post('tools/', [toolsController::class, 'createTool']);
 Route::delete('/tools/{id}', [toolsController::class, 'deleteTool']);
 
 /*

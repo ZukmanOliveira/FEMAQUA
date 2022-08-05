@@ -15,10 +15,15 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('link');
-            $table->text('tag');
-            // $table->string('tags');
+            
+          
+           // $table->text('tag');
+          ///$table->string('tags');
             $table->timestamps();
         });
+
+
+     
     }
 
     
