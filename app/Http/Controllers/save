@@ -334,3 +334,83 @@ class toolsController extends Controller
 
      
       }
+
+
+// consulta all tool
+$tool = new toolsModel();
+       foreach($tool as $tool){
+        $tools = new toolsModel();
+        $tools->title = $request->title;
+        $tools->link = $request->link;
+        $tools->description = $request->description;
+       }
+
+       $tags = new tagsModel();  
+       foreach($tags as $tag){
+        $tools = new toolsModel;
+        $tools->tags = $request->tags;
+        // dd($tools); retornando tags
+       }
+      
+
+       $tools->tags = $request->tags;
+      
+
+      
+        return response($tools,200);
+//FILTRO RETORNA FERRAMENTA//
+        public function getTool(Request $request,$tags) {
+        $tool = new toolsModel();
+     
+
+
+        foreach ($tool as $tools){
+        
+          $tools = tagsModel::firstWhere('tags',$tags);
+         // $tool->tagsModel;
+          $tool->id = $tools->id_tool;
+          $tool->tags = $tools->tags;
+          $tools = toolsModel::find($tool);
+          $tools ->tags = $tool->tags;
+         
+          dd($tools);
+        }
+
+        
+        return response($tool,200);
+        dd($tools);
+    
+    
+/*
+        if(tagsModel::where('tags', $tags)->exists()) {
+          foreach ($tool as $tools){
+          $tools = tagsModel::firstWhere('tags','LIKE',$tags);
+          
+          }
+         return response($tools,200);
+
+
+          return response()->json([
+            "message" => "records deleted"
+          ], 202);
+        }else {
+          return response()->json([
+            "message" => "Student not found"
+          ], 404);
+        }     
+       */
+      }
+
+
+
+
+
+        $tags = tagsModel::all();
+        foreach ($tags as $tools){
+        
+        
+        
+        $tools->$request = $tags;
+
+       // $tool->tags = $tags->tags;
+        dd($tools);

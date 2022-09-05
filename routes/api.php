@@ -15,24 +15,16 @@ use App\Http\Models\toolTags;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(["prefix"=>"tool"],function(){
 
 Route::get('/tools', [toolsController::class, 'getAllTool']);
-Route::get('/tool/{tags}', [toolsController::class, 'getTool']);
+Route::get('/tools/{tags}', [toolsController::class, 'getTool']);
 Route::post('tools/', [toolsController::class, 'createTool']);
 Route::delete('/tools/{id}', [toolsController::class, 'deleteTool']);
 
-/*
+});
 
-Route::get('students', 'ApiController@getAllStudents');
-Route::get('students/{id}', 'ApiController@getStudent');
-//Route::get('tools', 'toolsController@getAllTool');
-Route::put('students/{id}', 'ApiController@updateStudent');
-Route::delete('students/{id}','ApiController@deleteStudent');
-
-
-Route::post('tool', 'toolsController@createTool');
-*/

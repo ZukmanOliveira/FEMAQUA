@@ -13,12 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('toolsModel_tagsModel', function (Blueprint $table) {
+        Schema::create('tags_model_tools_model', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('toolsModel')->constrained('toolsModel');
-            $table->foreignId('tagsModel')->constrained('tagsModel');
+            //$table->unsignedBigInteger('toolsModel_id');
+            
+            $table->foreignId('tools_model_id')->constrained('toolsModel');
+            $table->foreignId('tags_model_id_tool')->constrained('tagsModel');
+            //$table->unsignedBigInteger('id_tool')->increment('id_tool');
             $table->timestamps();
         });
+
+        //Schema::table('tagsModel', function (Blueprint $table) {
+        //    $table->foreign('id')->references('toolsModel_id')->on('tags_model_tools_model')->onDelete('cascade');
+            
+       // });
 
       
     }
@@ -30,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('toolsModel_toolTags');
+        Schema::dropIfExists('tagsModeltoolsModel');
     }
 };

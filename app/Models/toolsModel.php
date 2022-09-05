@@ -14,25 +14,58 @@ class toolsModel extends Model
         'link',
         'description',
         'tags',
-        'id_tool',
         'id'
-        
-    ];
-    protected $guarded = [
-        'id_tool'
     ];
 
-    public function tools(){
-        //return $this->belongsToMany(tagsModel::class, 'toolsModel_tagsModel','toolsModel','tagsModel');
-        //return $this->belogsToMany(tagsModel::class)
-    }
-    public function tags(){
+    public function tags1(){
+        return $this->belongsToMany(tagsModel::class, 'toolsModel_tagsModel','toolsModel','tagsModel');
+        //return $this->belongsToMany(tagsModel::class)
+
+
+        ;
         
-            return $this->hasMany(tagsModel::class,$foreignKey='id_tool',$localKey='id');
+                          
+                           
     }
-    public function tagsCosulta()
+    public function tagss(){
+        
+            return $this->belogsToMany(tagsModel::class,$foreignKey='id_tool',$localKey='id');
+                        
+    }                       
+
+    public function toolsConsulta()
     {
-        return $this->belongsTo('App\Models\tagsModel');
+        return $this->belongsTo(tagsModel::class)
+                               ;
     }
 
+    public function tagsConsulta(){
+        
+        $tags = tagsModel::find(1);
+                         
+    }
+    //public function tags(){
+    //    return $this->belongsToMany(tagsModel::class)
+    //                ->select('tags')                  
+    //                ->get() 
+    //    ;  
+    // }
+ 
+    //public function tagsModel(){
+    //    return $this->belogsToMany(tagsModel::class,$foreignKey='id_tool',$localKey='id');
+    //    ;                           
+    //}               
+
+    public function tags(){
+        return $this->hasMany(tagsModel::class,$foreignKey='id_tool',$localKey='id');        //return $this->belongsToMany(toolsModel::class, 'toolsModel_tagsModel','toolsModel','tagsModel');
+        //return $this->belongsToMany(toolsModel::class)
+                                             
+                     ;
+    }
+    public function tagsModel(){
+        return $this->hasMany(tagsModel::class,$foreignKey='id_tool',$localKey='id');        //return $this->belongsToMany(toolsModel::class, 'toolsModel_tagsModel','toolsModel','tagsModel');
+        //return $this->belongsToMany(toolsModel::class)
+                                             
+                     ;
+    }
 }

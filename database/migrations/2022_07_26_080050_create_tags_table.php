@@ -14,14 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tool')->increment('id_tool');
             $table->timestamps();
         });
-
-        Schema::table('tagsModel', function (Blueprint $table) {
-            $table->foreign('id_tool')->references('id')->on('toolsModel')->onDelete('cascade');
-            
-        });
     }
-    
-
     public function down()
     {
         Schema::dropIfExists('tagsModel');
